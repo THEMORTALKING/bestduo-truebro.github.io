@@ -108,27 +108,53 @@
     
 </div>
 
-    <script>
-        // 🌿 ЛЕСНОЙ СКРИПТ — УЧИМ ПЕРЕМЕННЫЕ
-        console.log("Лес знаний открыт!");
-        
-        // 🌿 ЭКСПЕРИМЕНТ 2: УГЛУБЛЕНИЕ
-        // Учим переменные на практике
+   <script>
+    // 🌿 ЭКСПЕРИМЕНТ 2: УГЛУБЛЕНИЕ
+    // Учим переменные на практике
 
-        // 1. Создаём счётчик знаний (будет меняться — let)
-        let knowledgeCount = 0;
+    // 1. Создаём счётчик знаний (будет меняться — let)
+    let knowledgeCount = 0;
 
-        // 2. Находим элементы на странице (не будут меняться — const)
-        const counterDisplay = document.getElementById('counter');
-        const buttonCollect = document.getElementById('collect');
-        const buttonReset = document.getElementById('reset');
+    // 2. Находим элементы на странице (не будут меняться — const)
+    const counterDisplay = document.getElementById('counter');
+    const buttonCollect = document.getElementById('collect');
+    const buttonReset = document.getElementById('reset');
+    const messageDisplay = document.getElementById('message');
 
-        // 3. Показываем начальное значение
-        counterDisplay.textContent = knowledgeCount;
+    // 3. Функция для обновления сообщения
+    function updateMessage() {
+        if (knowledgeCount === 0) {
+            messageDisplay.textContent = "👣 Ты только вошёл в лес...";
+        } else if (knowledgeCount < 5) {
+            messageDisplay.textContent = "🌱 Ты собираешь первые шишки!";
+        } else if (knowledgeCount < 10) {
+            messageDisplay.textContent = "🌿 Твой рюкзак тяжелеет...";
+        } else {
+            messageDisplay.textContent = "🌟 Ты настоящий лесной мастер!";
+        }
+    }
 
-        // 4. Учимся слушать кнопки (продолжение следует...)
-        console.log("Лес знаний открыт! Счётчик:", knowledgeCount);
-    </script>
+    // 4. Обработчик для кнопки "Собрать шишку"
+    buttonCollect.addEventListener('click', function() {
+        knowledgeCount = knowledgeCount + 1;      // Увеличиваем счётчик
+        counterDisplay.textContent = knowledgeCount; // Показываем новое число
+        updateMessage();                           // Меняем сообщение
+    });
+
+    // 5. Обработчик для кнопки "Новый день"
+    buttonReset.addEventListener('click', function() {
+        // Спрашиваем подтверждение
+        if (confirm('Точно начать новый день? Все шишки пропадут!')) {
+            knowledgeCount = 0;                    // Сбрасываем счётчик
+            counterDisplay.textContent = knowledgeCount; // Показываем 0
+            updateMessage();                           // Меняем сообщение
+        }
+    });
+
+    // 6. Показываем начальное сообщение
+    updateMessage();
+    console.log("Лес знаний открыт! Счётчик:", knowledgeCount);
+</script>
 
 </body>
 </html>
