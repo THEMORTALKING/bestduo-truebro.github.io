@@ -117,6 +117,14 @@
     // 1. Создаём счётчик знаний (будет меняться — let)
     let knowledgeCount = 0;
 
+    // 1.5 Объект с данными исследователя леса 🌲
+    const forestExplorer = {
+    name: "BEST BRO",
+    age: 26,
+    isLearning: true,
+    favoriteItem: "🌰 шишка"
+    };
+
     // 2. Находим элементы на странице (не будут меняться — const)
     const counterDisplay = document.getElementById('counter');
     const buttonCollect = document.getElementById('collect');
@@ -157,8 +165,9 @@
     updateMessage();
     console.log("Лес знаний открыт! Счётчик:", knowledgeCount);
 
-    let имя = "BEST DUO";
-       document.getElementById('userName').textContent = имя;
+    // Покажем информацию об исследователе
+    let infoDiv = document.getElementById('userName');
+    infoDiv.innerHTML = `👤 Имя: ${forestExplorer.name} | Возраст: ${forestExplorer.age} | Любит: ${forestExplorer.favoriteItem}`;
 </script>
 
 </body>
