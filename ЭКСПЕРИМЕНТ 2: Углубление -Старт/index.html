@@ -72,9 +72,62 @@
         </div>
     </div>
 
+    <!-- ЛЕСНОЙ СЧЁТЧИК -->
+<div style="background: #1e3a2e; padding: 30px; border-radius: 20px; margin: 30px 0; border: 2px solid #d9b650;">
+
+    <h3 style="color: #d9b650; margin-top: 0; font-size: 24px;">
+        🌲 СЧЁТЧИК ЗНАНИЙ В ЛЕСУ
+    </h3>
+    
+    <p style="color: #e9f2e6; margin-bottom: 20px;">
+        Сколько шишек знаний ты собрал?
+    </p>
+    
+    <div id="counter" style="font-size: 72px; font-weight: bold; 
+        color: #d9b650; margin: 20px 0; text-shadow: 0 5px 15px rgba(217, 182, 80, 0.3);">
+        0
+    </div>
+    
+    <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+        <button id="collect" style="background: #d9b650; 
+            color: #1e3a2e; border: none; padding: 12px 30px; 
+            border-radius: 50px; font-size: 18px; font-weight: bold; cursor: pointer;">
+            🌰 Собрать шишку
+        </button>
+        
+        <button id="reset" style="background: #bf6f4a; color: #e9f2e6; 
+            border: none; padding: 12px 30px; border-radius: 50px; 
+            font-size: 18px; font-weight: bold; cursor: pointer;">
+            🔄 Новый день
+        </button>
+    </div>
+    
+    <p id="message" style="color: #bf6f4a; margin-top: 20px; min-height: 30px;">
+        👣 Ты только вошёл в лес...
+    </p>
+    
+</div>
+
     <script>
         // 🌿 ЛЕСНОЙ СКРИПТ — УЧИМ ПЕРЕМЕННЫЕ
         console.log("Лес знаний открыт!");
+        
+        // 🌿 ЭКСПЕРИМЕНТ 2: УГЛУБЛЕНИЕ
+        // Учим переменные на практике
+
+        // 1. Создаём счётчик знаний (будет меняться — let)
+        let knowledgeCount = 0;
+
+        // 2. Находим элементы на странице (не будут меняться — const)
+        const counterDisplay = document.getElementById('counter');
+        const buttonCollect = document.getElementById('collect');
+        const buttonReset = document.getElementById('reset');
+
+        // 3. Показываем начальное значение
+        counterDisplay.textContent = knowledgeCount;
+
+        // 4. Учимся слушать кнопки (продолжение следует...)
+        console.log("Лес знаний открыт! Счётчик:", knowledgeCount);
     </script>
 
 </body>
