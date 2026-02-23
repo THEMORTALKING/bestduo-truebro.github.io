@@ -102,6 +102,14 @@
             font-size: 18px; font-weight: bold; cursor: pointer;">
             🔄 Новый день
         </button>
+
+        <button id="ageButton" style="background: #d9b650; 
+            color: #1e3a2e; border: none; padding: 12px 30px;
+            border-radius: 50px; font-size: 18px; font-weight: bold; cursor: 
+                pointer; margin-top: 10px;">
+            🌲 Стать мудрее (+1 год)
+        </button>
+        
     </div>
     
     <p id="message" style="color: #bf6f4a; margin-top: 20px; min-height: 30px;">
@@ -168,6 +176,16 @@
     // Покажем информацию об исследователе
     let infoDiv = document.getElementById('userName');
     infoDiv.innerHTML = `👤 Имя: ${forestExplorer.name} | Возраст: ${forestExplorer.age} | Любит: ${forestExplorer.favoriteItem}`;
+
+       // 7. Обработчик для кнопки "Стать мудрее"
+    const ageButton = document.getElementById('ageButton');
+    const infoDiv = document.getElementById('userName');
+
+    ageButton.addEventListener('click', function() {
+    forestExplorer.age = forestExplorer.age + 1;  // Увеличиваем возраст в объекте
+    infoDiv.innerHTML = `👤 Имя: ${forestExplorer.name} | Возраст: ${forestExplorer.age} | Любит: ${forestExplorer.favoriteItem}`;
+    });
+       
 </script>
 
 </body>
