@@ -245,17 +245,32 @@
        
     //Макс. 10 предметов
     if (inventory.length < 10) {
-    inventory.push(foundItem);
+        inventory.push(foundItem);
     } else {
         alert("🌲 Инвентарь полон! Нужно что-то выкинуть.");
     }
 
-      document.getElementById('dropItem').addEventListener('click', function() {
-           if (inventory.length > 0) {
-            inventory.pop();
-            document.getElementById('inventory').innerHTML = showInventory();
-        }
-    });
+      // Кнопка "Выкинуть последний предмет"
+    const dropButton = document.getElementById('dropItem');
+
+    if (dropButton) { // Проверяем, нашлась ли кнопка
+        dropButton.addEventListener('click', function() {
+            if (inventory.length > 0) {
+                inventory.pop(); // Удаляем последний элемент
+                // Обновляем отображение инвентаря
+                const inventoryDiv = document.getElementById('inventory');
+                if (inventoryDiv) {
+                    inventoryDiv.innerHTML = showInventory();
+                } else {
+                    console.log("Ошибка: не найден div для инвентаря");
+                }
+            } else {
+                alert("🎒 Инвентарь и так пуст!");
+            }
+        });
+    } else {
+        console.log("Ошибка: кнопка с id 'dropItem' не найдена");
+    }
        
    </script>
 </body>
