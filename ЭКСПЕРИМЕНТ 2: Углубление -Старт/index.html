@@ -109,6 +109,13 @@
                 pointer; margin-top: 10px;">
             🌲 Стать мудрее (+1 год)
         </button>
+
+        <button id="findItem" style="background: #bf6f4a; 
+            color: #e9f2e6; border: none; padding: 12px 30px; 
+            border-radius: 50px; font-size: 18px; font-weight: 
+            bold; cursor: pointer; margin-top: 10px;">
+            🍄 Найти предмет в лесу
+        </button>
         
     </div>
     
@@ -179,7 +186,44 @@
     updateMessage();
     infoDiv.innerHTML = `👤 Имя: ${forestExplorer.name} | Возраст: ${forestExplorer.age} | Любит: ${forestExplorer.favoriteItem}`;
     console.log("Лес знаний открыт!");
-   </script>
 
+       // Инвентарь исследователя (массив)
+    let inventory = [];
+
+    // Функция для показа инвентаря
+    function showInventory() {
+        if (inventory.length === 0) {
+            return "🎒 Инвентарь: пока пусто";
+        } else {
+            return "🎒 Найдено: " + inventory.join(" • ");
+        }
+    }
+
+       // Кнопка "Найти предмет"
+    const findButton = document.getElementById('findItem');
+    const items = ["🌰 шишка", "🍂 лист", "🌿 ветка", "🍄 гриб", "🐚 улитка"];
+
+    findButton.addEventListener('click', function() {
+    const randomIndex = Math.floor(Math.random() * items.length);
+    const foundItem = items[randomIndex];
+    inventory.push(foundItem);
+    
+    // Показываем инвентарь
+    let inventoryDiv = document.getElementById('inventory');
+    if (!inventoryDiv) {
+        const newDiv = document.createElement('div');
+        newDiv.id = 'inventory';
+        newDiv.style.marginTop = '20px';
+        newDiv.style.color = '#d9b650';
+        newDiv.style.fontSize = '18px';
+        newDiv.style.padding = '10px';
+        newDiv.style.background = '#1e3a2e';
+        newDiv.style.borderRadius = '10px';
+        document.querySelector('.container').appendChild(newDiv);
+        inventoryDiv = newDiv;
+    }
+        inventoryDiv.innerHTML = showInventory();
+    });
+   </script>
 </body>
 </html>
