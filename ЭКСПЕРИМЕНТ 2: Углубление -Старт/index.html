@@ -199,7 +199,7 @@
     infoDiv.innerHTML = `👤 Имя: ${forestExplorer.name} | Возраст: ${forestExplorer.age} | Любит: ${forestExplorer.favoriteItem}`;
     console.log("Лес знаний открыт!");
 
-       // Инвентарь исследователя (массив)
+    // Инвентарь исследователя (массив)
     let inventory = [];
 
     // Функция для показа инвентаря
@@ -211,44 +211,50 @@
         }
     }
 
-       // Кнопка "Найти предмет"
+      // Кнопка "Найти предмет"
     const findButton = document.getElementById('findItem');
     const items = ["🌰 шишка", "🍂 лист", "🌿 ветка", "🍄 гриб", "🐚 улитка"];
 
     findButton.addEventListener('click', function() {
-    const randomIndex = Math.floor(Math.random() * items.length);
-    const foundItem = items[randomIndex];
-    inventory.push(foundItem);
+        // 1. Выбираем предмет
+        const randomIndex = Math.floor(Math.random() * items.length);
+        const foundItem = items[randomIndex];
     
-    // Показываем инвентарь
-    let inventoryDiv = document.getElementById('inventory');
-    if (!inventoryDiv) {
-        const newDiv = document.createElement('div');
-        newDiv.id = 'inventory';
-        newDiv.style.marginTop = '20px';
-        newDiv.style.color = '#d9b650';
-        newDiv.style.fontSize = '18px';
-        newDiv.style.padding = '10px';
-        newDiv.style.background = '#1e3a2e';
-        newDiv.style.borderRadius = '10px';
-        document.querySelector('.container').appendChild(newDiv);
-        inventoryDiv = newDiv;
-    }
+        // 2. Проверяем лимит и добавляем
+        if (inventory.length < 10) {
+            inventory.push(foundItem);
+        } else {
+            alert("🌲 Инвентарь полон! Нужно что-то выкинуть.");
+            return; // останавливаем выполнение
+        }
+    
+        // 3. Создаём div, если нужно
+        let inventoryDiv = document.getElementById('inventory');
+        if (!inventoryDiv) {
+            const newDiv = document.createElement('div');
+            newDiv.id = 'inventory';
+            newDiv.style.marginTop = '20px';
+            newDiv.style.color = '#d9b650';
+            newDiv.style.fontSize = '18px';
+            newDiv.style.padding = '10px';
+            newDiv.style.background = '#1e3a2e';
+            newDiv.style.borderRadius = '10px';
+            document.querySelector('.container').appendChild(newDiv);
+            inventoryDiv = newDiv;
+        }
+    
+        // 4. Показываем обновлённый инвентарь
         inventoryDiv.innerHTML = showInventory();
     });
 
-       //Очистить инвентарь
-     document.getElementById('clearInventory').addEventListener('click', function() {
+    // Очистить инвентарь
+    document.getElementById('clearInventory').addEventListener('click', function() {
         inventory = [];
-        document.getElementById('inventory').innerHTML = showInventory();
+        const inventoryDiv = document.getElementById('inventory');
+        if (inventoryDiv) {
+             inventoryDiv.innerHTML = showInventory();
+        }
     });
-       
-    //Макс. 10 предметов
-    if (inventory.length < 10) {
-        inventory.push(foundItem);
-    } else {
-        alert("🌲 Инвентарь полон! Нужно что-то выкинуть.");
-    }
 
       // Кнопка "Выкинуть последний предмет"
     const dropButton = document.getElementById('dropItem');
@@ -257,8 +263,8 @@
         dropButton.addEventListener('click', function() {
             if (inventory.length > 0) {
                 inventory.pop(); // Удаляем последний элемент
-                // Обновляем отображение инвентаря
-                const inventoryDiv = document.getElementById('inventory');
+            // Обновляем отображение инвентаря
+            const inventoryDiv = document.getElementById('inventory');
                 if (inventoryDiv) {
                     inventoryDiv.innerHTML = showInventory();
                 } else {
