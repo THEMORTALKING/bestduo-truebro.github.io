@@ -116,6 +116,18 @@
             bold; cursor: pointer; margin-top: 10px;">
             🍄 Найти предмет в лесу
         </button>
+
+        <button id="clearInventory" style="background: #a55d4a; color: #e9f2e6; 
+            border: none; padding: 12px 30px; border-radius: 50px; font-size: 18px; 
+            font-weight: bold; cursor: pointer; margin-top: 10px;">
+            🧹 Очистить инвентарь
+        </button>
+
+        <button id="dropItem" style="background: #a55d4a; color: #e9f2e6;
+            border: none; padding: 12px 30px; border-radius: 50px; font-size: 18px; 
+            font-weight: bold; cursor: pointer; margin-top: 10px;">
+            🗑️ Выкинуть последний предмет
+        </button>
         
     </div>
     
@@ -224,6 +236,27 @@
     }
         inventoryDiv.innerHTML = showInventory();
     });
+
+       //Очистить инвентарь
+     document.getElementById('clearInventory').addEventListener('click', function() {
+        inventory = [];
+        document.getElementById('inventory').innerHTML = showInventory();
+    });
+       
+    //Макс. 10 предметов
+    if (inventory.length < 10) {
+    inventory.push(foundItem);
+    } else {
+        alert("🌲 Инвентарь полон! Нужно что-то выкинуть.");
+    }
+
+      document.getElementById('dropItem').addEventListener('click', function() {
+           if (inventory.length > 0) {
+            inventory.pop();
+            document.getElementById('inventory').innerHTML = showInventory();
+        }
+    });
+       
    </script>
 </body>
 </html>
