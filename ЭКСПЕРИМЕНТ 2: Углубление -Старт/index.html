@@ -143,6 +143,17 @@
     // 1. Переменные
     let knowledgeCount = 0;
 
+       // Загружаем сохранение при старте
+    loadGame();
+       
+    // Обновляем отображение после загрузки
+    counterDisplay.textContent = knowledgeCount;
+    infoDiv.innerHTML = `👤 Имя: ${forestExplorer.name} | Возраст: ${forestExplorer.age} | Любит: ${forestExplorer.favoriteItem}`;
+    if (document.getElementById('inventory')) {
+        document.getElementById('inventory').innerHTML = showInventory();
+    }
+    updateMessage();
+
     // 2. Объект исследователя
     const forestExplorer = {
         name: "BEST BRO",
@@ -177,6 +188,7 @@
         knowledgeCount = knowledgeCount + 1;
         counterDisplay.textContent = knowledgeCount;
         updateMessage();
+        saveGame();
     });
 
     // 6. Кнопка "Новый день"
@@ -185,6 +197,7 @@
             knowledgeCount = 0;
             counterDisplay.textContent = knowledgeCount;
             updateMessage();
+            saveGame();
         }
     });
 
@@ -192,6 +205,7 @@
     ageButton.addEventListener('click', function() {
         forestExplorer.age = forestExplorer.age + 1;
         infoDiv.innerHTML = `👤 Имя: ${forestExplorer.name} | Возраст: ${forestExplorer.age} | Любит: ${forestExplorer.favoriteItem}`;
+        saveGame();
     });
 
     // 8. Показываем начальные значения
@@ -211,7 +225,7 @@
         }
     }
 
-      // Кнопка "Найти предмет"
+    // Кнопка "Найти предмет"
     const findButton = document.getElementById('findItem');
     const items = ["🌰 шишка", "🍂 лист", "🌿 ветка", "🍄 гриб", "🐚 улитка"];
 
@@ -245,6 +259,7 @@
     
         // 4. Показываем обновлённый инвентарь
         inventoryDiv.innerHTML = showInventory();
+        saveGame();
     });
 
     // Очистить инвентарь
@@ -252,7 +267,8 @@
         inventory = [];
         const inventoryDiv = document.getElementById('inventory');
         if (inventoryDiv) {
-             inventoryDiv.innerHTML = showInventory();
+            inventoryDiv.innerHTML = showInventory();
+            saveGame();
         }
     });
 
@@ -267,6 +283,7 @@
             const inventoryDiv = document.getElementById('inventory');
                 if (inventoryDiv) {
                     inventoryDiv.innerHTML = showInventory();
+                    saveGame();
                 } else {
                     console.log("Ошибка: не найден div для инвентаря");
                 }
@@ -276,6 +293,28 @@
         });
     } else {
         console.log("Ошибка: кнопка с id 'dropItem' не найдена");
+    }
+
+       // 💾 Функция сохранения
+    function saveGame() {
+        localStorage.setItem('forestKnowledge', knowledgeCount);
+        localStorage.setItem('forestInventory', JSON.stringify(inventory));
+        localStorage.setItem('explorerAge', forestExplorer.age);
+        console.log("🌲 Игра сохранена!");
+    }
+
+    // 📂 Функция загрузки
+    function loadGame() {
+        const savedCount = localStorage.getItem('forestKnowledge');
+        if (savedCount) knowledgeCount = parseInt(savedCount);
+    
+        const savedInventory = localStorage.getItem('forestInventory');
+        if (savedInventory) inventory = JSON.parse(savedInventory);
+    
+        const savedAge = localStorage.getItem('explorerAge');
+        if (savedAge) forestExplorer.age = parseInt(savedAge);
+    
+        console.log("🌲 Загружено:", knowledgeCount, inventory, forestExplorer.age);
     }
        
    </script>
