@@ -120,26 +120,27 @@
 
    <script>
     // 🌿 ЭКСПЕРИМЕНТ 2: УГЛУБЛЕНИЕ
-    // Учим переменные на практике
 
-    // 1. Создаём счётчик знаний (будет меняться — let)
+    // 1. Переменные
     let knowledgeCount = 0;
 
-    // 1.5 Объект с данными исследователя леса 🌲
+    // 2. Объект исследователя
     const forestExplorer = {
-    name: "BEST BRO",
-    age: 26,
-    isLearning: true,
-    favoriteItem: "🌰 шишка"
+        name: "BEST BRO",
+        age: 26,
+        isLearning: true,
+        favoriteItem: "🌰 шишка"
     };
 
-    // 2. Находим элементы на странице (не будут меняться — const)
+    // 3. Находим элементы
     const counterDisplay = document.getElementById('counter');
     const buttonCollect = document.getElementById('collect');
     const buttonReset = document.getElementById('reset');
     const messageDisplay = document.getElementById('message');
+    const ageButton = document.getElementById('ageButton');
+    const infoDiv = document.getElementById('userName');
 
-    // 3. Функция для обновления сообщения
+    // 4. Функция обновления сообщения
     function updateMessage() {
         if (knowledgeCount === 0) {
             messageDisplay.textContent = "👣 Ты только вошёл в лес...";
@@ -152,41 +153,33 @@
         }
     }
 
-    // 4. Обработчик для кнопки "Собрать шишку"
+    // 5. Кнопка "Собрать шишку"
     buttonCollect.addEventListener('click', function() {
-        knowledgeCount = knowledgeCount + 1;      // Увеличиваем счётчик
-        counterDisplay.textContent = knowledgeCount; // Показываем новое число
-        updateMessage();                           // Меняем сообщение
+        knowledgeCount = knowledgeCount + 1;
+        counterDisplay.textContent = knowledgeCount;
+        updateMessage();
     });
 
-    // 5. Обработчик для кнопки "Новый день"
+    // 6. Кнопка "Новый день"
     buttonReset.addEventListener('click', function() {
-        // Спрашиваем подтверждение
         if (confirm('Точно начать новый день? Все шишки пропадут!')) {
-            knowledgeCount = 0;                    // Сбрасываем счётчик
-            counterDisplay.textContent = knowledgeCount; // Показываем 0
-            updateMessage();                           // Меняем сообщение
+            knowledgeCount = 0;
+            counterDisplay.textContent = knowledgeCount;
+            updateMessage();
         }
     });
 
-    // 6. Показываем начальное сообщение
-    updateMessage();
-    console.log("Лес знаний открыт! Счётчик:", knowledgeCount);
-
-    // Покажем информацию об исследователе
-    let infoDiv = document.getElementById('userName');
-    infoDiv.innerHTML = `👤 Имя: ${forestExplorer.name} | Возраст: ${forestExplorer.age} | Любит: ${forestExplorer.favoriteItem}`;
-
-       // 7. Обработчик для кнопки "Стать мудрее"
-    const ageButton = document.getElementById('ageButton');
-    const infoDiv = document.getElementById('userName');
-
+    // 7. Кнопка "Стать мудрее"
     ageButton.addEventListener('click', function() {
-    forestExplorer.age = forestExplorer.age + 1;  // Увеличиваем возраст в объекте
-    infoDiv.innerHTML = `👤 Имя: ${forestExplorer.name} | Возраст: ${forestExplorer.age} | Любит: ${forestExplorer.favoriteItem}`;
+        forestExplorer.age = forestExplorer.age + 1;
+        infoDiv.innerHTML = `👤 Имя: ${forestExplorer.name} | Возраст: ${forestExplorer.age} | Любит: ${forestExplorer.favoriteItem}`;
     });
-       
-</script>
+
+    // 8. Показываем начальные значения
+    updateMessage();
+    infoDiv.innerHTML = `👤 Имя: ${forestExplorer.name} | Возраст: ${forestExplorer.age} | Любит: ${forestExplorer.favoriteItem}`;
+    console.log("Лес знаний открыт!");
+   </script>
 
 </body>
 </html>
