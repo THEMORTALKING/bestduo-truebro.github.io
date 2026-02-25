@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>ЭКСПЕРИМЕНТ 3 • ПРЕОДОЛЕНИЕ</title>
+    <style>
+        /* ⛰️ ГОРНЫЙ ПИК — ПРЕОДОЛЕНИЕ */
+        :root {
+            --bg: #1a2639;        /* глубокий синий, как ночное небо в горах */
+            --text: #e6e6e6;      /* белый, как снег */
+            --accent: #c9a76b;    /* золотой, как восход */
+            --bro-color: #b96b4a;  /* терракотовый, как скалы */
+            --panel: #2c3e50;      /* тёмный сланец */
+        }
+        
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Courier New', monospace;
+            margin: 0;
+            padding: 50px 20px;
+            text-align: center;
+        }
+        
+        .header { margin-bottom: 40px; }
+        .container { 
+            max-width: 800px; 
+            margin: 0 auto; 
+            background: var(--panel);
+            padding: 30px;
+            border-radius: 20px;
+            border: 2px solid var(--accent);
+        }
+        .nav { 
+            margin-top: 40px; 
+            padding-top: 20px; 
+            border-top: 2px solid var(--accent);
+        }
+        .nav a { 
+            color: var(--accent); 
+            margin: 0 10px;
+            text-decoration: none;
+        }
+        .nav a:hover { color: var(--bro-color); }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1 style="color: var(--accent);">ЭКСПЕРИМЕНТ 3</h1>
+        <h2 style="color: var(--bro-color);">⛰️ ПРЕОДОЛЕНИЕ</h2>
+        <p style="color: var(--text);">Вершины ждут тех, кто идёт...</p>
+    </div>
+
+    <div class="container">
+        <h3 style="color: var(--accent);">🏔️ СЧЁТЧИК ВОСХОЖДЕНИЙ</h3>
+        <p>Сколько раз ты поднимался на вершину?</p>
+        
+        <div id="counter" style="font-size: 72px; font-weight: bold; color: var(--accent); margin: 20px 0;">0</div>
+        
+        <button id="climbBtn" style="background: var(--accent); color: var(--bg); border: none; padding: 15px 30px; border-radius: 10px; font-size: 18px; font-weight: bold; cursor: pointer; margin: 5px;">
+            ⛰️ Совершить восхождение
+        </button>
+        
+        <div class="nav">
+            <a href="../index.html">← Нулевая История</a>
+            <a href="../ЭКСПЕРИМЕНТ-2/index.html">🌲 Эксперимент 2</a>
+        </div>
+    </div>
+
+    <script>
+        // ⛰️ ЭКСПЕРИМЕНТ 3: ПРЕОДОЛЕНИЕ
+        
+        // Счётчик восхождений
+        let climbCount = 0;
+        const counterDisplay = document.getElementById('counter');
+        
+        document.getElementById('climbBtn').addEventListener('click', function() {
+            climbCount++;
+            counterDisplay.textContent = climbCount;
+        });
+    </script>
+
+</body>
+</html>
