@@ -72,6 +72,18 @@
             font-weight: bold; cursor: pointer; margin: 10px;">
             🔁 10 восхождений за раз
         </button>
+
+        <button id="peakBtn" style="background: #c9a76b; color: #1a2639; 
+            border: none; padding: 12px 25px; border-radius: 10px; font-size: 16px; 
+            font-weight: bold; cursor: pointer; margin: 10px;">
+    🏔️         Покорить случайную вершину
+        </button>
+
+        <button id="resetPeaksBtn" style="background: #b96b4a; color: white; 
+            border: none; padding: 12px 25px; border-radius: 10px; font-size: 16px; 
+            font-weight: bold; cursor: pointer; margin: 10px;">
+            🗑️ Сбросить все вершины
+        </button>
     </div>
 
     <script>
@@ -80,18 +92,103 @@
         // Счётчик восхождений
         let climbCount = 0;
         const counterDisplay = document.getElementById('counter');
+
+        
         
         document.getElementById('climbBtn').addEventListener('click', function() {
             climbCount++;
             counterDisplay.textContent = climbCount;
         });
-
+        
+        // Массив покорённых вершин
+        let peaks = [];
+        
         // Кнопка "10 восхождений за раз"
         document.getElementById('multiClimbBtn').addEventListener('click', function() {
             for (let i = 0; i < 10; i++) {
                 climbCount++;
             }
             counterDisplay.textContent = climbCount;
+        });
+
+        // Список гор
+        const mountains = [
+        { name: "Эверест", height: 8848 },
+        { name: "К2", height: 8611 },
+        { name: "Канченджанга", height: 8586 },
+        { name: "Лхоцзе", height: 8516 },
+        { name: "Макалу", height: 8485 }
+        ];
+
+        // Кнопка "Покорить случайную вершину"
+        document.getElementById('peakBtn').addEventListener('click', function() {
+        // Выбираем случайную гору
+         const randomIndex = Math.floor(Math.random() * mountains.length);
+        const mountain = mountains[randomIndex];
+    
+        // Добавляем в массив покорённых вершин
+        peaks.push(mountain);
+    
+        // Увеличиваем счётчик восхождений
+        climbCount++;
+        counterDisplay.textContent = climbCount;
+    
+        // Показываем сообщение
+        alert(`✨ Ты покорил ${mountain.name}! Высота: ${mountain.height}м`);
+    
+        // Обновляем список покорённых вершин
+        updatePeaksList();
+        });
+
+        // Функция обновления списка вершин
+        function updatePeaksList() {
+        let listDiv = document.getElementById('peaksList');
+    
+        // Если списка ещё нет — создаём
+        if (!listDiv) {
+            listDiv = document.createElement('div');
+            listDiv.id = 'peaksList';
+            listDiv.style.marginTop = '30px';
+            listDiv.style.padding = '20px';
+            listDiv.style.background = '#2c3e50';
+            listDiv.style.borderRadius = '10px';
+            listDiv.style.border = '1px solid #c9a76b';
+            document.querySelector('.container').appendChild(listDiv);
+        }
+    
+        // Формируем HTML для списка
+        let html = '<h3 style="color: #c9a76b; margin-top: 0;">📜 ПОКОРЁННЫЕ ВЕРШИНЫ</h3>';
+    
+        if (peaks.length === 0) {
+            html += '<p style="color: #e6e6e6;">Пока нет покорённых вершин...</p>';
+        } else {
+            html += '<ul style="list-style: none; padding: 0;">';
+        
+            // Проходим по всем вершинам в массиве
+            for (let i = 0; i < peaks.length; i++) {
+                const p = peaks[i];
+                html += `<li style="color: #e6e6e6; margin: 10px 0; padding: 10px; 
+                background: #1a2639; border-radius: 5px; border-left: 4px solid #c9a76b;">
+                    🏔️ ${p.name} — ${p.height}м
+                </li>`;
+            }
+            html += '</ul>';
+        }
+    
+        listDiv.innerHTML = html;
+        }
+
+        // Вызови функцию при старте
+        updatePeaksList();
+
+        // Кнопка сброса вершин
+        document.getElementById('resetPeaksBtn').addEventListener('click', function() {
+            if (confirm('Точно забыть все покорённые вершины?')) {
+                peaks = [];
+                climbCount = 0;
+                counterDisplay.textContent = climbCount;
+                updatePeaksList();
+            }
         });
     </script>
 
