@@ -66,6 +66,12 @@
             <a href="../index.html">← Нулевая История</a>
             <a href="../ЭКСПЕРИМЕНТ 2: Углубление — старт/index.html">🌲 Эксперимент 2</a>
         </div>
+
+        <button id="multiClimbBtn" style="background: #b96b4a; color: white; 
+            border: none; padding: 12px 25px; border-radius: 10px; font-size: 16px; 
+            font-weight: bold; cursor: pointer; margin: 10px;">
+            🔁 10 восхождений за раз
+        </button>
     </div>
 
     <script>
@@ -77,6 +83,14 @@
         
         document.getElementById('climbBtn').addEventListener('click', function() {
             climbCount++;
+            counterDisplay.textContent = climbCount;
+        });
+
+        // Кнопка "10 восхождений за раз"
+        document.getElementById('multiClimbBtn').addEventListener('click', function() {
+            for (let i = 0; i < 10; i++) {
+                climbCount++;
+            }
             counterDisplay.textContent = climbCount;
         });
     </script>
